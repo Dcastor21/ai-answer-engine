@@ -1,3 +1,5 @@
+import { getGroqResponse } from "@/app/utils/aiClient";
+import { NextResponse } from "next/server";
 // TODO: Implement the chat API with Groq and web scraping with Cheerio and Puppeteer
 // Refer to the Next.js Docs on how to read the Request body: https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 // Refer to the Groq SDK here on how to use an LLM: https://www.npmjs.com/package/groq-sdk
@@ -6,10 +8,13 @@
 
 export async function POST(req: Request) {
   try {
+    const { message } = await req.json();
 
+    console.log("message recived:", message);
 
+    const response = await getGroqResponse(message);
+    return NextResponse.json({ message: response });
   } catch (error) {
-
-
+    return NextResponse.json({ message: "Error" });
   }
 }

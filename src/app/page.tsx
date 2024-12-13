@@ -33,17 +33,14 @@ export default function Home() {
       });
 
       // TODO: Handle the response from the chat API to display the AI response in the UI
-
-
-
-
+      const data = await response.json();
+      setMessages(prev => [...prev, { role: "ai", content: data.message }]);
     } catch (error) {
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
 
   // TODO: Modify the color schemes, fonts, and UI as needed for a good user experience
   // Refer to the Tailwind CSS docs here: https://tailwindcss.com/docs/customizing-colors, and here: https://tailwindcss.com/docs/hover-focus-and-other-states
@@ -52,7 +49,7 @@ export default function Home() {
       {/* Header */}
       <div className="w-full bg-gray-800 border-b border-gray-700 p-4">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-xl font-semibold text-white">Chat</h1>
+          <h1 className="text-xl font-semibold text-white">Ask AI Andi</h1>
         </div>
       </div>
 
